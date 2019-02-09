@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load hitcount_tags %}
+
+{% block title %}
+    Архив | {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+    <!--Main layout-->
+    <main class="mt-5 pt-4">
+        <div class="container">
+            <!--Section: Post-->
+            <section class="mt-4">
+                <!--Grid row-->
+                <div class="row">
+                    <!--Grid column-->
+                    <div class="col-md-8 mb-4">
+                        <!--Card-->
+                        <div class="mb-4 wow fadeIn">
+                            <!--Card content-->
+                            <div class="card-body">
+                                <p class="h5 my-4">Архив</p>
+
+                                <div class="table-responsive text-nowrap">
+                                    <table class="table">
+                                        {% for article in latest %}
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">{{ article.created|naturalday }}</th>
+                                            <td><a href="{{ article.get_absolute_url }}" class="text-dark text-dark font-weight-bold">{{ article.title }}</a></td>
+                                            <th></th>
+                                            <td></td>
+                                            <th></th>
+                                            <td></td>
+
+                                        </tr>
+                                        </tbody>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--/.Card-->
+
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Categories-->
+                    {% include 'block-two.html' %}
+                    <!--Categories-->
+
+                </div>
+                <!--Grid row-->
+
+            </section>
+            <!--Section: Post-->
+
+        </div>
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    {% include 'footer.html' %}
+    <!--/.Footer-->
+
+    <!-- SCRIPTS -->
+    {% include "scripts.html" %}
+
+</body>
+</html>
+
+{% endblock %}

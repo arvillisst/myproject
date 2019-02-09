@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load hitcount_tags %}
+
+
+{% block title %}
+    {{ article.title }} | {{ article.category.name }}
+{% endblock title %}
+
+{% block content %}
+    <!--Main layout-->
+    <main class="mt-5 pt-4">
+        <div class="container article-cont">
+            <!--Section: Post-->
+            <section class="mt-4">
+                <!--Grid row-->
+                <div class="row">
+                    <!--Grid column-->
+                    <div class="col-lg-9 col-md-9 mb-4">
+                        <!--Card-->
+                        <div class="mb-4 wow fadeIn">
+                            <!--Card content-->
+                                    <p class="h3 my-4">{{ article.title }}
+                                    <p class="font-small grey-text">
+                                        <i class="fa fa-clock-o" aria-hidden="true"> {{ article.created|naturalday }} |</i>
+                                        <i class="fa fa-eye" aria-hidden="true"> {{ hitcount.total_hits }} |</i>
+                                        {% load disqus_tags %}
+                                        <i class="fa fa-comment" aria-hidden="true">  <a href="{{ article.get_absolute_url }}#disqus_thread" class="font-small grey-text"> </a> </i>
+                                        {% disqus_num_replies %}
+                                    </p>
+                                    </p>
+                                <hr class="my-2">
+                                                        
+                                <p class="my-4">{{ article.content|safe }} </p> <hr>
+                                <!--Tags-->
+                                <p class="my-2 text-left font-small grey-text"> Теги:  
+                                     
+                                    {% for tag in article.tags.all %}
+                                        <a href="{% url 'tagged' tag.slug %}" class="badge badge-secondary" style="padding-bottom: 5px;">{{ tag.name }}</a>
+                                    {% endfor %}
+
+                                </p>
+
+                             <div class="col-md-12 text-center mb-3">
+                                {% if prev_post %}
+                                    <a href="{{ prev_post.get_absolute_url }}"><button type="button" class="btn btn-primary btn-sm">Предыдущая</button></a>
+                                {% endif %} 
+
+                                {% if next_post %} 
+                                  <a href="{{ next_post.get_absolute_url }}"><button type="button" class="btn btn-primary btn-sm">Следующая</button></a>
+                                {% endif %}
+                             </div>
+
+                            <!--Section: Last items-->
+                <section>
+                    <p id="back-top">
+                        <a href="#top"><span></span>Наверх</a>
+                    </p>
+                {% if similar_articles %}
+                    <h5 class="font-weight-bold mt-3 dark-grey-text">
+                        <strong>Похожие статьи</strong>
+                    </h5>
+                    <hr class="mb-3">
+
+                    <!-- Grid row -->
+                    <div class="row">
+
+                    {% for similar_article in similar_articles %}
+                        <!--Grid column-->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <!--Card-->
+                            <div class="card card-image similar-article" style="background-image: url({% if similar_article.image %}{{ similar_article.image.url }}{% endif %});">
+                                <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+
+                                    <h6 class="card-title pt-2">
+                                        <strong>
+                                            <a href="{{ similar_article.get_absolute_url }}" class="white-text">{{ similar_article.title }}</a>
+                                        </strong>
+                                    </h6>
+
+                                </div>
+
+                            </div>
+                            <!--Card-->
+                        </div>
+                        <!--Grid column-->
+                    {% endfor %}
+                    </div>
+                    <!--Grid row-->
+                {% endif %}
+                </section>
+                <!-- /.Section: Last items -->
+
+                        </div>
+                        <!--/.Card-->
+                        <!--Comments-->
+                        <div class="mb-3 wow fadeIn">
+                            {% load disqus_tags %}
+                            {% disqus_show_comments %}
+                        </div>
+                        <!--/.Comments-->
+                    </div>
+                    <!--Grid column-->
+                    
+                    <!--Categories-->
+                    {% include 'tutorials/_parts/block_two_detail.html' %}
+                    <!--Categories-->
+
+                </div>
+                <!--Grid row-->
+
+            </section>
+            <!--Section: Post-->
+
+        </div>
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    {% include 'footer.html' %}
+    <!--/.Footer-->
+
+    <!-- SCRIPTS -->
+    {% include "scripts.html" %}
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+	// hide #back-top first
+	$("#back-top").hide();
+
+	// fade in #back-top
+	$(function () {
+		$(window).scroll(function () {
+			if ($(this).scrollTop() > 100) {
+				$('#back-top').fadeIn();
+			} else {
+				$('#back-top').fadeOut();
+			}
+		});
+
+		// scroll body to 0px on click
+		$('#back-top a').click(function () {
+			$('body,html').animate({
+				scrollTop: 0
+			}, 800);
+			return false;
+		});
+	});
+
+});
+</script>
+
+</body>
+
+</html>
+{% endblock content %}

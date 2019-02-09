@@ -1,0 +1,115 @@
+
+<div class="col-lg-3 col-md-4 mb-4 pb-3 px-4 mt-1 ">
+    <div class="mb-4 pb-3 px-4 mt-1 blue-grey lighten-5">
+    <!-- Category blue-grey lighten-5-->
+    <div class="pb-0 mb-4 wow fadeIn">
+        <div class="single-post">
+            <br>
+            <p class="font-weight-bold dark-grey-text text-center">
+                <strong>{{ article.category.name }}</strong>
+            </p>
+
+            <ul class="list-group list-group-flush my-4">
+                {% for cat in art %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center blue-grey lighten-5">
+                        <a href="{{ c.get_absolute_url }}" class="text-dark font-small">
+                            <strong class="font-weight-bold mb-0 pop-lst">{{ cat.title }}</strong>
+                        </a>
+                    </li>
+
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <!--/.Category-->
+
+    <!--Popular-->
+    <div class="pb-0 mb-4 wow fadeIn ">
+        <div class="single-post">
+            <hr>
+            <p class="font-weight-bold dark-grey-text text-center">
+                <strong>Популярные статьи</strong>
+            </p>
+            <hr>
+            <!--Card content-->
+            <ul class="list-unstyled">
+                {% for popular_article in popular_articles %}
+                <li class="media my-3 mb-3">
+                    {% if popular_article.image.url %}
+                    <img class="img-fluid  d-flex mr-3" src="{{ popular_article.image.url }}" alt="An image"
+                         style="width:60px">
+                    {% endif %}
+                    <div class="media-body">
+                        <a href="{{ popular_article.get_absolute_url }}"
+                           class="text-dark text-dark font-small font-weight-bold pop-lst">
+                            {{ popular_article.title }}
+                        </a>
+
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+    <!--/.Popular-->
+
+    <!--Commenting-->
+    <div class="pb-0 mb-4 wow fadeIn ">
+        <div class="single-post">
+            <hr>
+            <p class="font-weight-bold dark-grey-text text-center">
+                <strong>Самые обсуждаемые</strong>
+            </p>
+            <hr>
+            <!--Card content-->
+            <ul class="list-unstyled">
+                <li class="media my-3 mb-3">
+                    <div class="media-body">
+                        {% load disqus_tags %}
+                        {% disqus_recent_comments shortname 5 37 1 %}
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+    <!--/.Commenting-->
+
+    <!--Tags-->
+    <div class="pb-0 mb-4 wow fadeIn">
+        <!-- Content <div class="single-post"> -->
+        <div class="single-post">
+            <hr>
+            <p class="font-weight-bold dark-grey-text text-center">
+                <strong>Теги</strong>
+            </p>
+            <hr>
+            <ul class="list-unstyled">
+                <li class="media my-2 md-3">
+                    <div class="media-body">
+                        {% for tag in all_tags %}
+                          <a href="{% url 'tagged' slug=tag.slug %}" class="badge badge indigo" style="padding-bottom: 5px;">{{ tag.name }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+            </ul>
+
+
+            <!-- Content -->
+        </div>
+    </div>
+    <!--/.Tags-->
+
+    <!--Archive  -->
+    <div class="pb-0 mb-4 wow fadeIn">
+        <hr>
+        <p class="font-weight-bold dark-grey-text text-center">
+            <a href="{% url 'article_archive' %}" class="font-weight-bold dark-grey-text"> <strong>Архив</strong> </a>
+        </p>
+        <hr>
+    </div>
+    <!--/.Archive-->
+    </div>
+</div>

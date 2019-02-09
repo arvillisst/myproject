@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load hitcount_tags %}
+
+{% block title %}
+    {{ snippet.title }} | {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+    <!--Main layout-->
+    <main class="mt-5 pt-4">
+        <div class="container">
+            <!--Section: Post-->
+            <section class="mt-4">
+                <!--Grid row-->
+                <div class="row">
+                    <!--Grid column-->
+                    <div class="col-md-9 mb-4">
+                        <!--Featured Image<div class="card mb-4 wow fadeIn">
+                            <img src="{{ article.image.url }}" class="img-fluid" alt="">
+                        </div>  -->
+                        
+
+                        <!--Card-->
+                        <div class="mb-4 wow fadeIn">
+                            <!--Card content-->
+                            <div class="card-body">                            
+                                    <p class="h3 my-4">{{ snippet.title }}
+                                        <p class="font-small grey-text">
+                                             <i class="fa fa-clock-o" aria-hidden="true">   {{ snippet.created|naturalday }}  |</i>
+                                             <i class="fa fa-eye" aria-hidden="true">   {{ hitcount.total_hits }} |</i>
+                                             {% load disqus_tags %}
+                                                <i class="fa fa-comment" aria-hidden="true">  <a href="{{ snippet.get_absolute_url }}#disqus_thread" class="font-small grey-text"> </a> </i>
+                                             {% disqus_num_replies %}
+                                        </p>
+                                    </p>
+                                <hr class="my-2">
+                                                        
+                                <p class="my-4">{{ snippet.content|safe }} </p>
+                                <!--Tags-->
+                                <p class="my-2 text-left">
+                                    
+                                    
+                                    
+                                </p>
+
+                            </div>
+                             <div class="col-md-12 text-center mb-3">
+
+                                {% if prev_post %}
+                                    <a href="{{ prev_post.get_absolute_url }}"><button type="button" class="btn btn-primary btn-sm">Предыдущая</button></a>
+                                {% endif %}
+
+                                {% if next_post %}
+                                  <a href="{{ next_post.get_absolute_url }}"><button type="button" class="btn btn-primary btn-sm">Следующая</button></a>
+                                {% endif %}
+                                
+                                 
+                             </div>       
+
+                            
+                        </div>
+                        <!--/.Card-->
+
+                        <!--Comments-->
+                        <div class="mb-3 wow fadeIn">
+                            <div class="card-body">
+                                {% load disqus_tags %}
+                                {% disqus_show_comments %}
+                            </div>
+                        </div>
+                        <!--/.Comments-->
+
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Categories-->
+                    {% include 'block-two.html' %}
+                    <!--Categories-->
+
+                </div>
+                <!--Grid row-->
+
+            </section>
+            <!--Section: Post-->
+
+        </div>
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    {% include 'footer.html' %}
+    <!--/.Footer-->
+
+    <!-- SCRIPTS -->
+    {% include "scripts.html" %}
+    <!-- Initializations -->
+    <script type="text/javascript">
+        // Animations initialization
+        new WOW().init();
+    </script>
+</body>
+
+</html>
+{% endblock content %}

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load hitcount_tags %}
+
+{% block content %}
+    <!--Main layout-->
+    <main class="mt-5 pt-5">
+        <div class="container">
+            <!--Section: Post-->
+            <section class="mt-4">
+                <!--Grid row-->
+                <div class="row">
+                    <!--Grid column-->
+                    <div class="col-lg-9 col-md-8 mb-4 mt-4">
+                        <div class="row">
+                            <!--Grid column-->
+                            <!-- Card -->
+                            {% for cat in cats %}
+                            <div class="col-lg-6 col-md-6 mb-4">
+                                <div class="card card-image" style="background-image: url({% if cat.image %}{{ cat.image.url }}{% endif %});">
+
+                                    <!-- Content -->
+                                    <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+                                        <div>
+
+                                            <h3 class="card-title pt-2"><strong>{{ cat.name }}</strong></h3>
+                                            <p>{{ cat.short_description|truncatewords_html:15 }}</p>
+                                            {% for i in cat.tutorial_set.all %}
+                                                {% if forloop.first %}
+                                                    <a href="{{ i.get_absolute_url }}" class="btn btn-blue"> Начать</a>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- Card -->
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <!--Pagination-->
+                        	<nav aria-label="pagination example">
+							    <ul class="pagination justify-content-center">
+							        {% if cats.has_other_pages %}
+                                <!--Arrow left-->
+                              {% if cats.has_previous %}
+                                <li class="page-item">
+                                    <a href="?page={{ cats.previous_page_number }}" class="page-link grey-text" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    {% endif %}
+                                </li>
+
+
+                                <!--Numbers-->
+                              {% for i in cats.paginator.page_range %}
+                                {% if cats.number == i %}
+                                <li class="page-item active">
+                                    <a class="page-link">{{ i }}</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item">
+                                    <a href="?page={{ i }}" class="page-link grey-text">{{ i }}</a>
+                                </li>
+                                {% endif %}
+                              {% endfor %}
+
+                                <!--Arrow right-->
+                                {% if cats.has_next %}
+                                <li class="page-item">
+                                    <a href="?page={{ cats.next_page_number }}" class="page-link grey-text" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                                {% endif %}
+                              {% endif %}
+							    </ul>
+							</nav>
+                        <!--Pagination-->                      
+                        
+                    </div>
+                    <!--Grid column-->
+                
+
+                    <!--Categories-->
+                    {% include 'tutorials/_parts/block-two.html' %}
+                    <!--Categories-->
+                </div>
+                <!--Grid row-->
+            </section>
+            <!--Section: Post-->
+
+        </div>
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    {% include 'footer.html' %}
+    <!--/.Footer-->
+
+    <!-- SCRIPTS -->
+    {% include "scripts.html" %}
+
+</body>
+
+</html>
+{% endblock content %}

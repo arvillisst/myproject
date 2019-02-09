@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load hitcount_tags %}
+
+{% block title %}
+    О сайте | {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+    <!--Main layout-->
+    <main class="mt-5 pt-4">
+        <div class="container">
+            <!--Section: Post-->
+            <section class="mt-4">
+                <!--Grid row-->
+                <div class="row">
+                    <!--Grid column-->
+                    <div class="col-lg-9 col-md-8 mb-4">
+                        <!--Card-->
+                        <div class="mb-4 wow fadeIn">
+                            <!--Card content-->
+                            <div class="card-body">
+                                    <p class="h5 my-4">О сайте</p>
+                                <hr class="my-2">
+
+                                <p class="my-4">Django — Python Веб платформа, которая поощряет быструю разработку и чистый, прагматичный код.
+                                    Построенный, опытными разработчиками, Django заботится о многих проблемах веб-разработки, так что вы можете сосредоточиться на написании
+                                    приложения без необходимости заново изобретать колесо. Он является свободным и с открытым исходным кодом.</p>
+                                <p class="my-4"> Настоятельно рекомендуется писать код вручную. Использовать среду для разработки. Отличным вариантом является
+                                Pycharm, даже Community версия. Можно бесплатную версию использовать в связке с Sublime Text, в котором установлен плагин для шаблонов Django - Djaneiro.</p>
+                                <p class="my-4 font-small"> Если Вам понравился сайт, можно поддержать, пожертвовав немного (на хостинг) на карту: 1234 5678 9012 3456</p>
+
+                            </div>
+
+                        </div>
+                        <!--/.Card-->
+
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Categories-->
+                    {% include 'block-two.html' %}
+                    <!--Categories-->
+
+                </div>
+                <!--Grid row-->
+
+            </section>
+            <!--Section: Post-->
+
+        </div>
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    {% include 'footer.html' %}
+    <!--/.Footer-->
+
+    <!-- SCRIPTS -->
+    {% include "scripts.html" %}
+
+</body>
+</html>
+
+{% endblock %}
