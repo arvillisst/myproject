@@ -31,6 +31,3 @@ myproject/myproject/.env
 .idea
 .idea/
 
-# Static dev
-static_dev/
-media
