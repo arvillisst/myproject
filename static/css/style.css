@@ -1,0 +1,71 @@
+.card-comments img {
+  width: 4rem; }
+
+body, html {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+}
+
+.font-small {
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+.pop-lst {
+    font-size: .7rem;
+}
+
+.badge {
+    padding-bottom: 5px;
+}
+
+.similar-article {
+    height: 100px;
+
+}
+
+#back-top {
+	position: fixed;
+	bottom: 30px; /* отступ кнопки снизу */
+	margin-left: -150px; /* отступ кнопки слева (для указания отступа справа
+используйте margin-right) */
+}
+
+#back-top a {
+	width: 48px;
+	display: block;
+	text-align: center;
+	font: 9px/100% Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #bbb;
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+}
+#back-top a:hover {
+	color: #000;
+}
+
+/* иконка стрелки (тег span) */
+#back-top span {
+	width: 48px;
+	height: 48px;
+	display: block;
+	margin-bottom: 7px;
+    background: url(up-arrow.png) no-repeat center center;
+	/* в скобках указываем путь к иконке  background: #ddd url(img/up-arrow.png) no-repeat center center; */
+
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+
+	/* скругленные углы  */
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+
+}
+#back-top a:hover span {
+	background-color: #f5f5f5;
+}
